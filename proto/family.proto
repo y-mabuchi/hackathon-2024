@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package family;
+
+option go_package = "backend/handler/grpc/generated";
+
+service FamilyService {
+  rpc FindOneFamily(FindOneFamilyRequest) returns (FindOneFamilyResponse) {}
+  rpc CreateFamily(CreateFamilyRequest) returns (CreateFamilyResponse) {}
+  rpc UpdateFamily(UpdateFamilyRequest) returns (UpdateFamilyResponse) {}
+  rpc DeleteFamily(DeleteFamilyRequest) returns (DeleteFamilyResponse) {}
+}
+
+message Family {
+  string id = 1;
+  string name = 2;
+}
+
+// Find one
+message FindOneFamilyRequest {
+  string id = 1;
+}
+
+message FindOneFamilyResponse {
+  Family family = 1;
+}
+
+// Create
+message CreateFamilyRequest {
+  string name = 1;
+}
+
+message CreateFamilyResponse {
+  Family family = 1;
+}
+
+// Update
+message UpdateFamilyRequest {
+  Family family = 1;
+}
+
+message UpdateFamilyResponse {
+  Family family = 1;
+}
+
+// Delete
+message DeleteFamilyRequest {
+  string id = 1;
+}
+
+message DeleteFamilyResponse {
+  bool success = 1;
+}

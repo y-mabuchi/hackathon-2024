@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package child_profile;
+
+option go_package = "backend/handler/grpc/generated";
+
+import "google/protobuf/timestamp.proto";
+
+service ChildProfileService {
+  rpc FindOneChildProfile(FindOneChildProfileRequest) returns (FindOneChildProfileResponse) {}
+  rpc CreateChildProfile(CreateChildProfileRequest) returns (CreateChildProfileResponse) {}
+  rpc UpdateChildProfile(UpdateChildProfileRequest) returns (UpdateChildProfileResponse) {}
+  rpc DeleteChildProfile(DeleteChildProfileRequest) returns (DeleteChildProfileResponse) {}
+}
+
+message ChildProfile {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  ChildGender gender = 4;
+  google.protobuf.Timestamp birthday = 5;
+  string family_id = 6;
+}
+
+// Find one
+message FindOneChildProfileRequest {
+  string id = 1;
+  string family_id = 2;
+}
+
+message FindOneChildProfileResponse {
+  ChildProfile profile = 1;
+}
+
+// Create
+enum ChildGender {
+  CHILD_GENDER_UNSPECIFIED = 0;
+  CHILD_GENDER_BOY = 1;
+  CHILD_GENDER_GIRL = 2;
+}
+
+message CreateChildProfileRequest {
+  string first_name = 1;
+  string last_name = 2;
+  ChildGender gender = 3;
+  google.protobuf.Timestamp birthday = 4;
+  string family_id = 5;
+}
+
+message CreateChildProfileResponse {
+  ChildProfile profile = 1;
+}
+
+// Update
+message UpdateChildProfileRequest {
+  ChildProfile profile = 1;
+}
+
+message UpdateChildProfileResponse {
+  ChildProfile profile = 1;
+}
+
+// Delete
+message DeleteChildProfileRequest {
+  string id = 1;
+  string family_id = 2;
+}
+
+message DeleteChildProfileResponse {
+  bool success = 1;
+}
